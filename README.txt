@@ -1,9 +1,10 @@
-Thea 2 compiler operation
+Thea 2 compiler operation, V1.0.0.1
+https://github.com/Aqarius90/Thea2ModCompiler
 
 ***Starting assumptions***
 -/StreamingAssets folder (henceforth "/root") contains the default game xml. indices(terrains.xml, database.xml, and eventModules.xml), and the folders DataBase, Modules, and Terrain Sources, that the indices point to.
 -root also contains mod folders, the names of which all start with "@" (eg. /@RPMod)
--Each mod folder contains indices pointing to the mod files, in their respective folders (eg, /@RPMod/database.xml, pointing to /@RPMod/DataBase/moddeddbfile.xml)
+-Each mod folder contains indices pointing to the mod files, in their respective folders (eg, /@RPMod/database.xml, pointing to /@RPMod/DataBase/moddeddbfile.xml), as listed in compiler on startup.
 
 
 ***Operation***
