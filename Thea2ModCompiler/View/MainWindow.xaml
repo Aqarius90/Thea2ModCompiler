@@ -1,0 +1,43 @@
+﻿<Window x:Class="Thea2ModCompiler.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Thea2ModCompiler"
+        mc:Ignorable="d"
+        Title="Thea 2 Mod compiler" Height="450" Width="800">
+    <Grid x:Name="MainWindowGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30px"></RowDefinition>
+            <RowDefinition Height="30px"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="30px"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50px"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="50px"/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="BrowseButton" Grid.Column="0" Content="Browse" Command="{Binding BrowseClick}"/>
+            <TextBox x:Name="SelectedFileTextBox" Grid.Column="1" Text="{Binding Path=selectedFilePath}"/>
+            <Button x:Name="LoadFileButton" Grid.Column="2" Content="LOAD" Command="{Binding LoadFileClick}"/>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="StrictParameterFollow" Grid.Column="0" Content="{Binding StrictParameterFollow}" Command="{Binding ToggleParamFollowClick}"></Button>
+            <Button x:Name="UsePrototypeInference" Grid.Column="1" Content="{Binding UsePrototypeInference}" Command="{Binding UsePrototypeInferenceClick}"></Button>
+            <Button x:Name="AttemptMerge" Grid.Column="2" Content="{Binding AttemptMerge}" Command="{Binding AttemptMergeClick}"></Button>
+        </Grid>
+        <ListView x:Name="FileList" Grid.Row="2"
+                        ItemsSource="{Binding FileList}"
+                        SelectionMode="Single">
+        </ListView>
+        <Button Grid.Row="3" Content="Compile" Command="{Binding CompileClick}" CommandParameter="{ Binding ElementName=FileList, Path=SelectedItems}"/>
+
+    </Grid>
+</Window>
