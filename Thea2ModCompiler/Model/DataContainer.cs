@@ -52,12 +52,35 @@ namespace Thea2ModCompiler.Model
             debugLog.Clear();
             //load default data
             ReadXML(RootPath);
+            
 
             //load mod data
             foreach(string dir in mods)
             {
                 ReadXML(Path.Combine(path, dir));
             }
+
+            //copy scripts (overwrite existing, a mod should only ever overwrite the stock files, and even then only to add "partial")
+            foreach (string dir in mods)
+            {
+                var dataPath = Path.Combine(path, dir);
+                var copyTo = Path.Combine(RootPath, "Scripts");
+                dataPath = Path.Combine(dataPath, "Scripts");
+                try
+                {
+                    foreach (string f in Directory.GetFiles(dataPath))
+                    {
+                        string fileName = Path.GetFileName(f);
+                        string destFile = Path.Combine(copyTo, fileName);
+                        File.Copy(f, destFile, true);
+                    }
+                }
+                catch (FileNotFoundException)
+                {//not an error, per se, just not used
+                    debugLog.Add("no scripts in mod");
+                }
+            }
+
 
             //compile
             if (debugLog.Any(p => p.Contains("##error")))
@@ -536,7 +559,8 @@ namespace Thea2ModCompiler.Model
             {//overwrite attribs
                 if (oldNode.Attribute(x.Name) == null || oldNode.Attribute(x.Name).Value != x.Value)
                 {
-                    oldNode.Attribute(x.Name).Value = x.Value;
+                    oldNode.SetAttributeValue(x.Name, x.Value);
+                    //oldNode.Attribute(x.Name).Value = x.Value;
                     debugLog.Add("set attrib" + x.Name + " to " + x.Value);
                 }
             }

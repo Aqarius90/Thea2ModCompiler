@@ -65,7 +65,6 @@
     </Compile>
     <Compile Include="Model\DataContainer.cs" />
     <Compile Include="Util\CommandProvider.cs" />
-    <Compile Include="Util\Utils.cs" />
     <Compile Include="ViewModel\MainWindowVM.cs" />
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
